@@ -1,7 +1,7 @@
 {
   "name": "Shop",
   "version": "0.0.1",
-  "author": "Jan Bissinger, Philipp Diemert, Dennis Heer, Arno Gliga",
+  "author": "Jan Bissinger, Philipp Diemert, Arno Gliga, Dennis Heer",
   "dependencies": {
     "angular2": "2.0.0-beta.12",
     "systemjs": "0.19.24",
