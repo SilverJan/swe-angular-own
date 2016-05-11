@@ -2,6 +2,15 @@ swe-angular-own
 ======================
 Own implementation of Jürgens Abgabe 2 in SWE - Angular frontend impl of given backend
 
+IDE Settings (WebStorm)
+----------------------
+File/Settings/Languages & Frameworks/JavaScript set ECMAScript 6
+
+Init & Install
+----------------------
+    npm install
+
+
 Backend start
 ----------------------
 ### Batch file (fancy!)

@@ -22,7 +22,7 @@ var prod = (argv === 'true') ? true : false;
 
 // ----------------------------------------------------------
 // C O N F I G
-// ----------------------------------------------------------
+// ---------------------------------------------------------- 
 
 /* PATHS */
 
@@ -139,5 +139,5 @@ function getLocalIp() {
 }
 
 gulp.task('ip', function () {
-    console.log(getLocalIp());
+    return console.log(getLocalIp());
 })
