@@ -104,17 +104,19 @@ gulp.task('webserver', function () {
     const port = '8000';
 
     console.log("###################");
-    console.log(`Webserver-URI: https://${getLocalIp()}:${port}`);
+    console.log(`Webserver-URI (localhost): https://localhost:${port}`);
+    console.log(`Webserver-URI (network): https://${getLocalIp()}:${port}`);
     console.log("###################");
 
     return gulp.src(buildPath)
         .pipe(
             webserver({
-                host: '0.0.0.0',
+                // host: '0.0.0.0',
                 port: port,
                 https: true,
                 livereload: true,
-                open: `https://${getLocalIp()}:${port}`
+                // open: `https://${getLocalIp()}:${port}`
+                open: `https://localhost:${port}`
             }));
 });
 
