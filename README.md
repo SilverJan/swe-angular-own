@@ -13,6 +13,14 @@ Init & Install
 
 Backend start
 ----------------------
+Before start: Edit C:\Zimmermann\wildfly\standalone\configuration\standalone.xml
+
+    <response-header name="cors-origin" header-name="Access-Control-Allow-Origin" header-value="https://localhost"/>
+to (Add port 8000 to URI):
+
+    <response-header name="cors-origin" header-name="Access-Control-Allow-Origin" header-value="https://localhost:8000"/>
+
+
 ### Batch file (fancy!)
 Start via batch file (in project directory)
 
