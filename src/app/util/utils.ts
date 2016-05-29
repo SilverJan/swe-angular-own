@@ -12,6 +12,23 @@ export function isStringNullOrEmpty(objs: string[]): boolean {
     objs.forEach(function (currentValue) {
         if (currentValue === null || currentValue === undefined || currentValue === "") {
             empty = true;
+            return true;
+        }
+    });
+    return empty;
+}
+
+/**
+ * Returns true if at least one object is null or undefined or NaN
+ * @param objs Array of objects
+ * @returns {boolean}
+ */
+export function isObjectNullOrEmptyOrNaN(objs: any[]): boolean {
+    var empty = false;
+    objs.forEach(function (currentValue) {
+        if (currentValue === null || currentValue === undefined || isNaN(currentValue)) {
+            empty = true;
+            return true;
         }
     });
     return empty;
