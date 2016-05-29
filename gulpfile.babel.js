@@ -120,7 +120,7 @@ gulp.task('webserver', function () {
             }));
 });
 
-gulp.task('run', gulp.series('html', 'ts', 'css', 'webserver', 'watch'));
+gulp.task('run', gulp.series('build', 'webserver', 'watch'));
 
 // ----------------------------------------------------------
 // U T I L S
