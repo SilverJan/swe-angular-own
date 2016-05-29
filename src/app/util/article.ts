@@ -1,6 +1,6 @@
 export interface IArticle {
     version: number;
-    id: string;
+    id?: string;
     bezeichnung: string;
     preis: number;
     kategorie: string;
