@@ -1,3 +1,7 @@
+// let base64 = require('base-64');
+// var utf8 = require('utf8');
+declare var base64: any;
+
 /**
  * Returns true if at least one string is null, undefined or empty
  * @param objs Array of strings
@@ -20,4 +24,8 @@ export function isStringNullOrEmpty(objs: string[]): boolean {
  */
 export function isArrayNullOrUndefined(obj: any[]): boolean {
     return typeof obj === 'undefined' || typeof obj === 'null';
+}
+
+export function encodeBase64(text: string) {
+    return base64.encode(text);
 }
