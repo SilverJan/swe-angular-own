@@ -1,18 +1,21 @@
-import {Component} from 'angular2/core';
-import {IArticle, articleMockA, articleMockB} from '../util/article';
+import {Component, OnInit} from 'angular2/core';
+import {IArticle} from '../util/article';
 import {ArticleSearchService} from '../services/article.search.service';
-import {isStringNullOrEmpty} from '../util/utils';
+import {isStringNullOrEmpty, isObjectNullOrEmptyOrNaN} from '../util/utils';
 import {NOT_FOUND} from '../util/constants';
+import {ArticleAddComponent, ArticleAddSelection} from './article.admin.add.component';
+import {LoginService} from '../services/login.service';
 /**
  * Created by Jan on 25.05.2016.
  */
 @Component({
-    template: `<div class="container-fluid">
+    template: `
+    <div class="container-fluid">
         <!--Search form-->
         <div class="col-sm-4">
             <form class="form-inline">
               <fieldset class="form-group">
-                <label for="formGroupExampleInput">Suchbegriff</label>
+                <label>Suchbegriff</label>
                 <input type="text" class="form-control" [(ngModel)]="searchInput" placeholder="z.B. Tisch 'Oval'">
                 <button type="submit" class="btn btn-default" (click)="onClickSearch()">Suchen</button>
               </fieldset>
@@ -44,35 +47,68 @@ import {NOT_FOUND} from '../util/constants';
         
         <!-- Article detail box -->
         <div class="col-sm-4" *ngIf="selectedArticle">
-            <h3>Artikeldetails</h3>
-            <dl class="dl-horizontal">
-              <dt class="col-sm-3">Version</dt>
-              <dd class="col-sm-9">{{selectedArticle.version}}</dd>
-              <dt class="col-sm-3">ID</dt>
-              <dd class="col-sm-9">{{selectedArticle.id}}</dd>
-              <dt class="col-sm-3">Bezeichnung</dt>
-              <dd class="col-sm-9">{{selectedArticle.bezeichnung}}</dd>
-              <dt class="col-sm-3">Preis</dt>
-              <dd class="col-sm-9">{{selectedArticle.preis}}€</dd>
-              <dt class="col-sm-3">Kategorie</dt>
-              <dd class="col-sm-9">{{selectedArticle.kategorie}}</dd>
-              <dt class="col-sm-3">Rating</dt>
-              <dd class="col-sm-9">{{selectedArticle.rating}}</dd>
-              <dt class="col-sm-3">Ausgesondert</dt>
-              <dd class="col-sm-9">{{selectedArticle.ausgesondert}}</dd>
-            </dl>
+            <div *ngIf="!loggedIn">
+                <h3>Artikeldetails</h3>
+                 <article-add [versionInput]=selectedArticle.version
+                [idInput]=selectedArticle.id
+                [bezeichnungInput]=selectedArticle.bezeichnung
+                [preisInput]=selectedArticle.preis
+                [kategorieInput]=selectedArticle.kategorie
+                [ratingInput]=selectedArticle.rating
+                [ausgesondertInput]=selectedArticle.ausgesondert
+                
+                [submitActionText]=null
+                [editDisabled]=true
+                ></article-add>
+            </div>
+            <div *ngIf="loggedIn">
+                <h3>Artikeldetails</h3>
+                 <article-add [versionInput]=selectedArticle.version
+                [idInput]=selectedArticle.id
+                [bezeichnungInput]=selectedArticle.bezeichnung
+                [preisInput]=selectedArticle.preis
+                [kategorieInput]=selectedArticle.kategorie
+                [ratingInput]=selectedArticle.rating
+                [ausgesondertInput]=selectedArticle.ausgesondert
+                
+                [submitActionText]=submitActionText
+                [postSuccessText]=postSuccessText
+                [editDisabled]=!loggedIn
+                [selectionMode]=selectionMode
+                ></article-add>
+            </div>
         </div>
     </div>
     `,
-    providers: [ArticleSearchService]
+    directives: [ArticleAddComponent]
 })
-export class ArticleSearchComponent {
+export class ArticleSearchComponent implements OnInit {
     public searchInput: string;
     public foundArticles: IArticle[];
     public selectedArticle: IArticle;
     public noArticlesFound: boolean = false;
+    public loggedIn: boolean = false;
 
-    constructor(private _articleSearchService: ArticleSearchService) {
+    private submitActionText: string = 'Aktualisieren';
+    private postSuccessText: string = 'Datensatz wurde erfolgreich aktualisiert!';
+    private selectionMode: ArticleAddSelection = ArticleAddSelection.Update;
+
+    constructor(private _articleSearchService: ArticleSearchService,
+                private _loginService: LoginService) {
+        // This only works if LoginService is bootstrapped in main.ts -> Why? Dunno!
+        _loginService.loggedInObservable$.subscribe(
+            (newLoginState: boolean) => {
+                this.loggedIn = newLoginState;
+            }
+        );
+    }
+
+    ngOnInit(): any {
+        // if loginState is undefined (never set by a service), then it is false. Maybe put this in getLoginState() method
+        const loginState = this._loginService.getLoginState();
+        this.loggedIn = isObjectNullOrEmptyOrNaN([loginState]) === true ? false :
+            loginState;
+        return undefined;
     }
 
     public onClickSearch(): void {
@@ -86,7 +122,6 @@ export class ArticleSearchComponent {
     }
 
     public onClickArticleDetails(article: IArticle): void {
-        // Do /id request and preview in article detail box
         this.selectedArticle = article;
     }
 
