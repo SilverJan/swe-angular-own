@@ -1,12 +1,9 @@
 /**
  * Created by Jan on 28.03.2016.
  */
-import {Component, provide, OnInit} from 'angular2/core';
+import {Component, provide} from 'angular2/core';
 import {
-    ROUTER_DIRECTIVES,
-    ROUTER_PROVIDERS,
-    LocationStrategy,
-    HashLocationStrategy,
+    ROUTER_DIRECTIVES, ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy,
     RouteConfig
 } from 'angular2/router';
 import {ArticleAdminComponent} from './article.admin.component';
@@ -23,20 +20,14 @@ import {ArticleAdminService} from '../services/article.admin.service';
     providers: [ROUTER_PROVIDERS, ArticleSearchService, ArticleAdminService,
         provide(LocationStrategy, {useClass: HashLocationStrategy})],
     selector: 'app'
-})
-@RouteConfig([
-    {
-        path: '/articleadmin/...',
-        name: 'ArticleAdmin',
-        component: ArticleAdminComponent
-    },
-    {
-        path: '/articlesearch',
-        name: 'ArticleSearch',
-        component: ArticleSearchComponent,
-        useAsDefault: true
-    }
-])
+}) @RouteConfig([{
+    path: '/articleadmin/...', name: 'ArticleAdmin', component: ArticleAdminComponent
+}, {
+    path: '/articlesearch',
+    name: 'ArticleSearch',
+    component: ArticleSearchComponent,
+    useAsDefault: true
+}])
 export class AppComponent {
     private userName: string;
     private password: string;
@@ -62,18 +53,16 @@ export class AppComponent {
     private login(userName: string, password: string): void {
         this._loginService.testLogin(userName, password)
             .subscribe(() => {
-                    this.loggedIn = true;
-                    let baseAuth = encodeBase64(userName + ':' + password).trim();
-                    localStorage.setItem(LOCALSTORAGE_AUTH, baseAuth);
-                    this._loginService.changeLogin(true);
-                },
-                (err: any) => {
-                    if (err === NOT_ALLOWED) {
-                        this.loginFailure = true;
-                        this.loggedIn = false;
-                    }
+                this.loggedIn = true;
+                let baseAuth = encodeBase64(userName + ':' + password).trim();
+                localStorage.setItem(LOCALSTORAGE_AUTH, baseAuth);
+                this._loginService.changeLogin(true);
+            }, (err: any) => {
+                if (err === NOT_ALLOWED) {
+                    this.loginFailure = true;
+                    this.loggedIn = false;
                 }
-            );
+            });
     }
 
 }

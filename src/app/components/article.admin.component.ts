@@ -1,8 +1,6 @@
 import {Component} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 import {ArticleAddComponent} from './article.admin.add.component';
-import {ArticleUpdateComponent} from './article.admin.update.component';
-import {ArticleAdminService} from '../services/article.admin.service';
 /**
  * Created by Jan on 25.05.2016.
  */

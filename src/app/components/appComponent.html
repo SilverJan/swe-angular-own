@@ -1,5 +1,5 @@
 <nav class="navbar navbar-dark bg-inverse">
-    <a class="navbar-brand" >Menü</a>
+    <a class="navbar-brand">Menü</a>
     <ul class="nav navbar-nav">
         <li *ngIf="loggedIn" class="nav-item">
             <a class="nav-link" [routerLink]="['ArticleAdmin']">Artikelverwaltung</a>
@@ -10,8 +10,12 @@
     </ul>
     <form class="form-inline pull-xs-right">
         <div class="container">
-            <button *ngIf="!loggedIn" type="button" class="btn btn-default btn-md" data-toggle="modal" data-target="#loginModal" style="color: #000101">Login</button>
-            <button *ngIf="loggedIn" type="button" class="btn btn-default btn-md" (click)="onClickLogout()" style="color: #000101">Logout</button>
+            <button *ngIf="!loggedIn" type="button" class="btn btn-default btn-md" data-toggle="modal"
+                    data-target="#loginModal" style="color: #000101">Login
+            </button>
+            <button *ngIf="loggedIn" type="button" class="btn btn-default btn-md" (click)="onClickLogout()"
+                    style="color: #000101">Logout
+            </button>
 
             <!-- Modal -->
             <div class="modal fade" id="loginModal" role="dialog">
@@ -26,15 +30,19 @@
                         <div class="modal-body">
                             <form class="form-horizontal">
                                 <div class="form-group">
-                                    <label for="username"  style="color: #000101">Benuternamen</label>
-                                    <input type="text" class="form-control" [(ngModel)]="userName" id="username" required>
+                                    <label for="username" style="color: #000101">Benuternamen</label>
+                                    <input type="text" class="form-control" [(ngModel)]="userName" id="username"
+                                           required>
                                 </div>
                                 <div class="form-group">
                                     <label for="password" style="color: #000101">Passwort</label>
-                                    <input type="password" class="form-control" [(ngModel)]="password" id="password" required>
+                                    <input type="password" class="form-control" [(ngModel)]="password" id="password"
+                                           required>
                                 </div>
                                 <br><br>
-                                <button type="submit" (click)="onClickLogin()" class="btn btn-default btn-success btn-block" data-dismiss="modal">Login</button>
+                                <button type="submit" (click)="onClickLogin()"
+                                        class="btn btn-default btn-success btn-block" data-dismiss="modal">Login
+                                </button>
                             </form>
                         </div>
                     </div>

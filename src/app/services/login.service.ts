@@ -4,14 +4,13 @@ import {host, port, NOT_FOUND, NOT_ALLOWED} from '../util/constants';
 import {Observable} from 'rxjs/Observable';
 import {IArticle} from '../util/article';
 import {encodeBase64} from '../util/utils';
-import {Subject} from 'rxjs/Subject';
 import {BehaviorSubject} from 'rxjs/Rx';
 
 @Injectable()
 export class LoginService {
     private _loginTestUri: string = `https://${host}:${port}/shop/rest/artikel/ratingStats`;
     private _loggedInSource: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(undefined);
-    loggedInObservable$  = this._loggedInSource.asObservable();
+    loggedInObservable$ = this._loggedInSource.asObservable();
 
     constructor(private _http: Http) {
     }

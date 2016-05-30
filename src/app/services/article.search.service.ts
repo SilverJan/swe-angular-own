@@ -8,6 +8,7 @@ import {IArticle} from '../util/article';
 export class ArticleSearchService {
     private _catalogueUri = `https://${host}:${port}/shop/rest/katalog`;
     private _articleIdUri = this._catalogueUri + '/';
+
     constructor(private _http: Http) {
     }
 
