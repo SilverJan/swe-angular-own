@@ -11,6 +11,13 @@ Init & Install
     npm install
 
 
+Frontend start
+----------------------
+    gulp run
+Cleans build dir, starts code style formatters, builds project files, starts webserver, starts watch task
+
+For single tasks, see gulpfile
+
 Backend start
 ----------------------
 Before start: Edit C:\Zimmermann\wildfly\standalone\configuration\standalone.xml
@@ -57,3 +64,7 @@ Javadoc:
     cd <wildfly-project-dir>
     gradlew javadoc
 index.html: <wildfly-project-dir>/build/docs/javadoc/index.html
+
+ClangFormat error fixes HOWTO
+----------------------
+      .\node_modules\clang-format\bin\win32\clang-format -i -style="file" src\...\myfile.ts
