@@ -13,6 +13,8 @@ var tscConfig = require('./tsconfig.json');
 var gulpIf = require('gulp-if');
 var yargs = require('yargs');
 var uglify = require('gulp-uglify');
+var gulpClangFormat = require('gulp-clang-format');
+var clangFormatPkg = require('clang-format');
 
 // ----------------------------------------------------------
 // P A R A M E T E R S
@@ -44,6 +46,22 @@ gulp.task('clean', function () {
     return removeDirectory(buildPath);
 });
 
+gulp.task('clangFormat', function() {
+    'use strict';
+    // const argv = minimist(process.argv.slice(2));
+    // if (argv.nocheck) {
+    //     done();
+    //     return;
+    // }
+
+    return gulp.src(srcPaths.tsFiles)
+        .pipe(gulpClangFormat.checkFormat('file', clangFormatPkg, {verbose: true}))
+        .on('warning', function(e) {
+            process.stdout.write(e.message);
+            process.exit(1);
+        });
+});
+
 gulp.task('tslint', function () {
     'use strict';
     return gulp.src(srcPaths.tsFiles)
@@ -59,7 +77,7 @@ gulp.task('tsc', function () {
         .pipe(gulp.dest(buildPath));
 });
 
-gulp.task('ts', gulp.series('tslint', 'tsc'));
+gulp.task('ts', gulp.series('clangFormat', 'tslint', 'tsc'));
 
 gulp.task('html', function () {
     'use strict';
