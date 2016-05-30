@@ -9,26 +9,21 @@ export class ArticleSearchService {
     private _catalogueUri = `https://${host}:${port}/shop/rest/katalog`;
     private _articleIdUri = this._catalogueUri + '/';
 
-    constructor(private _http: Http) {
-    }
+    constructor(private _http: Http) {}
 
     getAllArticles(description?: string): Observable<IArticle[]> {
         if (description) {
-            return this._http.get(this._catalogueUri + "?bezeichnung=" + description)
+            return this._http.get(this._catalogueUri + '?bezeichnung=' + description)
                 .map(this.extractData)
                 .catch(this.handleError);
         } else {
-            return this._http.get(this._catalogueUri)
-                .map(this.extractData)
-                .catch(this.handleError);
+            return this._http.get(this._catalogueUri).map(this.extractData).catch(this.handleError);
         }
     }
 
     getArticle(id: string): Observable<IArticle> {
         let idUri = this._articleIdUri + id;
-        return this._http.get(idUri)
-            .map(this.extractData)
-            .catch(this.handleError);
+        return this._http.get(idUri).map(this.extractData).catch(this.handleError);
     }
 
     private extractData(res: Response) {
@@ -48,5 +43,4 @@ export class ArticleSearchService {
             return Observable.throw(errMsg);
         }
     }
-
 }

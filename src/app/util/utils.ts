@@ -9,8 +9,8 @@ declare var base64: any;
  */
 export function isStringNullOrEmpty(objs: string[]): boolean {
     var empty = false;
-    objs.forEach(function (currentValue) {
-        if (currentValue === null || currentValue === undefined || currentValue === "") {
+    objs.forEach(function(currentValue) {
+        if (currentValue === null || currentValue === undefined || currentValue === '') {
             empty = true;
             return true;
         }
@@ -25,7 +25,7 @@ export function isStringNullOrEmpty(objs: string[]): boolean {
  */
 export function isObjectNullOrEmptyOrNaN(objs: any[]): boolean {
     var empty = false;
-    objs.forEach(function (currentValue) {
+    objs.forEach(function(currentValue) {
         if (currentValue === null || currentValue === undefined || isNaN(currentValue)) {
             empty = true;
             return true;

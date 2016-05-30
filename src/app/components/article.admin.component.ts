@@ -22,13 +22,6 @@ import {ArticleAddComponent} from './article.admin.add.component';
     `,
     directives: [ROUTER_DIRECTIVES]
 })
-@RouteConfig([
-    {
-        path: '/articleAdd',
-        name: 'ArticleAdd',
-        component: ArticleAddComponent,
-        useAsDefault: true
-    }
-])
+@RouteConfig([{path: '/articleAdd', name: 'ArticleAdd', component: ArticleAddComponent, useAsDefault: true}])
 export class ArticleAdminComponent {
 }

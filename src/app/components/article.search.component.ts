@@ -79,7 +79,8 @@ import {LoginService} from '../services/login.service';
             </div>
         </div>
     </div>
-    `, directives: [ArticleAddComponent]
+    `,
+    directives: [ArticleAddComponent]
 })
 export class ArticleSearchComponent implements OnInit {
     public searchInput: string;
@@ -92,19 +93,16 @@ export class ArticleSearchComponent implements OnInit {
     private postSuccessText: string = 'Datensatz wurde erfolgreich aktualisiert!';
     private selectionMode: ArticleAddSelection = ArticleAddSelection.Update;
 
-    constructor(private _articleSearchService: ArticleSearchService,
-                private _loginService: LoginService) {
+    constructor(private _articleSearchService: ArticleSearchService, private _loginService: LoginService) {
         // This only works if LoginService is bootstrapped in main.ts -> Why? Dunno!
-        _loginService.loggedInObservable$.subscribe((newLoginState: boolean) => {
-            this.loggedIn = newLoginState;
-        });
+        _loginService.loggedInObservable$.subscribe((newLoginState: boolean) => { this.loggedIn = newLoginState; });
     }
 
     ngOnInit(): any {
-        // if loginState is undefined (never set by a service), then it is false. Maybe put this in getLoginState() method
+        // if loginState is undefined (never set by a service), then it is false. Maybe put this in getLoginState()
+        // method
         const loginState = this._loginService.getLoginState();
-        this.loggedIn =
-            isObjectNullOrEmptyOrNaN([loginState]) === true ? false : loginState;
+        this.loggedIn = isObjectNullOrEmptyOrNaN([loginState]) === true ? false : loginState;
         return undefined;
     }
 
@@ -118,9 +116,7 @@ export class ArticleSearchComponent implements OnInit {
         this.selectedArticle = null;
     }
 
-    public onClickArticleDetails(article: IArticle): void {
-        this.selectedArticle = article;
-    }
+    public onClickArticleDetails(article: IArticle): void { this.selectedArticle = article; }
 
     private getAllArticles(description?: string): void {
         // Reset situation
@@ -128,14 +124,14 @@ export class ArticleSearchComponent implements OnInit {
         this.noArticlesFound = false;
 
         this._articleSearchService.getAllArticles(description)
-            .subscribe((articles: IArticle[]) => {
-                this.foundArticles = articles;
-            }, (err: any) => {
-                if (err.message === NOT_FOUND || description) {
-                    this.noArticlesFound = true;
-                } else {
-                    console.log(err);
-                }
-            });
+            .subscribe(
+                (articles: IArticle[]) => { this.foundArticles = articles; },
+                (err: any) => {
+                    if (err.message === NOT_FOUND || description) {
+                        this.noArticlesFound = true;
+                    } else {
+                        console.log(err);
+                    }
+                });
     }
 }

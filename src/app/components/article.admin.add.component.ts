@@ -4,7 +4,8 @@ import {isStringNullOrEmpty, isObjectNullOrEmptyOrNaN} from '../util/utils';
 import {ArticleAdminService} from '../services/article.admin.service';
 
 @Component({
-    selector: 'article-add', template: `
+    selector: 'article-add',
+    template: `
         <div class="container-fluid">
             <div *ngIf="errorMessage" class="alert alert-danger">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -71,21 +72,18 @@ export class ArticleAddComponent {
     private errorMessage: string;
     private postSuccess: boolean;
 
-    constructor(private _articleAdminService: ArticleAdminService) {
-    }
+    constructor(private _articleAdminService: ArticleAdminService) {}
 
     private onClickAdd() {
         this.postSuccess = null;
         this.errorMessage = null;
-        if (isStringNullOrEmpty([this.bezeichnungInput, this.kategorieInput]) ||
-            isObjectNullOrEmptyOrNaN(
-                [this.versionInput, this.preisInput, this.ratingInput])) {
-            this.errorMessage = "Nicht alle Felder ausgefüllt!";
+        if (isStringNullOrEmpty([this.bezeichnungInput, this.kategorieInput])
+            || isObjectNullOrEmptyOrNaN([this.versionInput, this.preisInput, this.ratingInput])) {
+            this.errorMessage = 'Nicht alle Felder ausgefüllt!';
             return;
         }
-        if (this.versionInput < 0 || this.preisInput < 0 || this.ratingInput < 0 ||
-            this.ratingInput > 5) {
-            this.errorMessage = "Nicht alle Felder korrekt ausgefüllt!";
+        if (this.versionInput < 0 || this.preisInput < 0 || this.ratingInput < 0 || this.ratingInput > 5) {
+            this.errorMessage = 'Nicht alle Felder korrekt ausgefüllt!';
             return;
         }
 
@@ -103,22 +101,20 @@ export class ArticleAddComponent {
             article.id = this.idInput;
             this.updateArticle(article);
         }
-
     }
 
     private postArticle(article: IArticle) {
-        this._articleAdminService.postArticle(article)
-            .subscribe(message => this.postSuccess = true,
-                error => this.errorMessage = "Felder wurden nicht korrekt ausgefüllt!");
+        this._articleAdminService.postArticle(article).subscribe(
+            message => this.postSuccess = true, error => this.errorMessage = 'Felder wurden nicht korrekt ausgefüllt!');
     }
 
     private updateArticle(article: IArticle) {
-        this._articleAdminService.updateArticle(article)
-            .subscribe(message => this.postSuccess = true,
-                error => this.errorMessage = "Felder wurden nicht korrekt ausgefüllt!");
+        this._articleAdminService.updateArticle(article).subscribe(
+            message => this.postSuccess = true, error => this.errorMessage = 'Felder wurden nicht korrekt ausgefüllt!');
     }
 }
 
 export enum ArticleAddSelection {
-    Add, Update
+    Add,
+    Update
 }

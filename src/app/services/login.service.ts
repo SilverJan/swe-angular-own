@@ -12,29 +12,20 @@ export class LoginService {
     private _loggedInSource: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(undefined);
     loggedInObservable$ = this._loggedInSource.asObservable();
 
-    constructor(private _http: Http) {
-    }
+    constructor(private _http: Http) {}
 
     testLogin(userName: string, password: string): Observable<IArticle[]> {
         let baseAuth = encodeBase64(userName + ':' + password).trim();
         let header = new Headers();
         header.append('authorization', `Basic ${baseAuth}`);
-        let options = new RequestOptions({
-            headers: header
-        });
+        let options = new RequestOptions({headers: header});
 
-        return this._http.get(this._loginTestUri, options)
-            .map(this.extractData)
-            .catch(this.handleError);
+        return this._http.get(this._loginTestUri, options).map(this.extractData).catch(this.handleError);
     }
 
-    changeLogin(newLoginState: boolean) {
-        this._loggedInSource.next(newLoginState);
-    }
+    changeLogin(newLoginState: boolean) { this._loggedInSource.next(newLoginState); }
 
-    getLoginState(): boolean {
-        return this._loggedInSource.getValue();
-    }
+    getLoginState(): boolean { return this._loggedInSource.getValue(); }
 
     private extractData(res: Response) {
         if (res.status < 200 || res.status >= 300) {
@@ -51,9 +42,8 @@ export class LoginService {
             return Observable.throw(NOT_ALLOWED);
         } else {
             let errMsg = error.message || 'Server error';
-            console.error('An error occurred: ' + errMsg + "; code: " + error.status);
+            console.error('An error occurred: ' + errMsg + '; code: ' + error.status);
             return Observable.throw(errMsg);
         }
     }
-
 }
