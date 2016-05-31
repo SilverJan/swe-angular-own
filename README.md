@@ -8,6 +8,8 @@ File/Settings/Languages & Frameworks/JavaScript set ECMAScript 6
 
 STEP 1: Init & Install Frontend
 ----------------------
+Do the following command in the frontend project directory
+
     npm install
     
 STEP 2: Backend deployment
