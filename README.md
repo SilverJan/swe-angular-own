@@ -6,10 +6,25 @@ IDE Settings (WebStorm)
 ----------------------
 File/Settings/Languages & Frameworks/JavaScript set ECMAScript 6
 
-Init & Install
+STEP 1: Init & Install Frontend
 ----------------------
     npm install
+    
+STEP 2: Backend deployment
+----------------------
+Load project from ILIAS and save somewhere (== backend-project-dir)
 
+    cd <backend-project-dir>
+    gradlew assemble
+    gradlew deploy
+Once deployed, the server starts always with the same .war file. This step must be done only once.
+
+
+STEP 3: Start Frontend and Backend
+----------------------
+See headings below! Order is irrelevant, you just have to start both without gulp or wildfly errors.
+
+But one more thing: When everything has started, open a new chrome tab with the following URI and accept the security info: https://localhost:8443/shop/rest
 
 Frontend start
 ----------------------
@@ -47,13 +62,6 @@ Shutdown with Enter click (see batch instructions)
     // wildfly
     jboss-cli -c --command=shutdown
 
-Backend deployment
-----------------------
-    cd <wildfly-project-dir>
-    gradlew assemble
-    gradlew deploy
-
-Once deployed, the server starts always with the same .war file
 
 Backend doku
 ----------------------
