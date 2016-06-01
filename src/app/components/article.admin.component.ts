@@ -1,9 +1,7 @@
 import {Component} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 import {ArticleAddComponent} from './article.admin.add.component';
-/**
- * Created by Jan on 25.05.2016.
- */
+
 
 @Component({
     template: `

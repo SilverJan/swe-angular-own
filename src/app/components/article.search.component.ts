@@ -5,9 +5,7 @@ import {isStringNullOrEmpty, isObjectNullOrEmptyOrNaN} from '../util/utils';
 import {NOT_FOUND} from '../util/constants';
 import {ArticleAddComponent, ArticleAddSelection} from './article.admin.add.component';
 import {LoginService} from '../services/login.service';
-/**
- * Created by Jan on 25.05.2016.
- */
+
 @Component({
     template: `
     <div class="container-fluid">
