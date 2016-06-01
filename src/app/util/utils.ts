@@ -1,5 +1,3 @@
-// let base64 = require('base-64');
-// var utf8 = require('utf8');
 declare var base64: any;
 
 /**
