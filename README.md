@@ -1,6 +1,11 @@
 swe-angular-own
 ======================
-Own implementation of Jürgens Abgabe 2 in SWE - Angular frontend impl of given backend
+This is the frontend implementation for my uni project in University of Applied Science Karlsruhe Bachelor Degree Business Informatics in subject 'Softwareentwicklung' in summer term 16 (SS16). We were given a WildFly backend (shop implementation) with a REST interface. The task was building a frontend with Angular 2.
+
+Framework: Angular 2
+Language: TypeScript
+CSS Library: Bootstrap and Custom
+Build Tool: Gulp
 
 IDE Settings (WebStorm)
 ----------------------
