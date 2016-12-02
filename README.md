@@ -2,10 +2,10 @@ swe-angular-own
 ======================
 This is the frontend implementation for my uni project in University of Applied Science Karlsruhe Bachelor Degree Business Informatics in subject 'Softwareentwicklung' in summer term 16 (SS16). We were given a WildFly backend (shop implementation) with a REST interface. The task was building a frontend with Angular 2.
 
-Framework: Angular 2
-Language: TypeScript
-CSS Library: Bootstrap and Custom
-Build Tool: Gulp
+Framework: Angular 2<br>
+Language: TypeScript<br>
+CSS Library: Bootstrap and Custom<br>
+Build Tool: Gulp<br>
 
 IDE Settings (WebStorm)
 ----------------------
